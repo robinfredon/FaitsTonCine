@@ -2,6 +2,7 @@ package org.sid.DaoImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.sid.InterfaceDao.IdeeRepository;
 import org.sid.entities.Idee;
@@ -152,6 +153,24 @@ public class IdeeDaoImpl implements IdeeRepository {
 
 	@Override
 	public <S extends Idee> Optional<S> findOne(Example<S> arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> getIdeeByidee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> getIdeeByGenre(Long g) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Idee findByIdee(String i) {
 		// TODO Auto-generated method stub
 		return null;
 	}

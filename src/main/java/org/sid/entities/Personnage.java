@@ -7,20 +7,21 @@ import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Personnage")
 public class Personnage implements Serializable{
 
-	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idPersonnage")
 	private Long idPersonnage;
     private String nom;
     private String prenom;
@@ -28,34 +29,19 @@ public class Personnage implements Serializable{
     private int age;
     private char sexe;
     private String biographie;
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Personnage", 
-        joinColumns = { @JoinColumn(name = "idPersonnage") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idCaracterePer") }
-    )
-    private Set<CaracterePersonnage> caracterPersonnage  = new HashSet<CaracterePersonnage>(0);
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Personnage", 
-        joinColumns = { @JoinColumn(name = "idPersonnage") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idProjet") }
-    )
-    private Set<Projet> projets  = new HashSet<Projet>(0);
+    private Utilisateur utilisateur;
+
+
+    private Set<PersonnageCaractere> personnageCaracter  = new HashSet<PersonnageCaractere>(0);
+    private Set<ProjetPersonnage> projetPersonnage  = new HashSet<ProjetPersonnage>(0);
+    
     public Personnage() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Personnage(String nom, String prenom, String surnom, int age, char sexe, String biographie) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.surnom = surnom;
-		this.age = age;
-		this.sexe = sexe;
-		this.biographie = biographie;
-	}
-	
+
+	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idPersonnage")
 	public Long getIdPersonnage() {
 		return idPersonnage;
 	}
@@ -98,25 +84,33 @@ public class Personnage implements Serializable{
 	public void setBiographie(String biographie) {
 		this.biographie = biographie;
 	}
-	
-
-	public Set<CaracterePersonnage> getCaracterPersonnage() {
-		return caracterPersonnage;
-	}
-	public void setCaracterPersonnage(Set<CaracterePersonnage> caracterPersonnage) {
-		this.caracterPersonnage = caracterPersonnage;
-	}
-	
-	
-	public Set<Projet> getProjets() {
-		return projets;
-	}
-	public void setProjets(Set<Projet> projets) {
-		this.projets = projets;
+	  @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL)
+	public Set<PersonnageCaractere> getPersonnageCaracter() {
+		return personnageCaracter;
 	}
 
+	public void setPersonnageCaracter(Set<PersonnageCaractere> personnageCaracter) {
+		this.personnageCaracter = personnageCaracter;
+	}
+	  @OneToMany(mappedBy = "personnage", cascade = CascadeType.ALL)
+	public Set<ProjetPersonnage> getProjetPersonnage() {
+		return projetPersonnage;
+	}
+
+	public void setProjetPersonnage(Set<ProjetPersonnage> projetPersonnage) {
+		this.projetPersonnage = projetPersonnage;
+	}
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idUtilisateur", nullable = false)
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	
-	
-	
+
 
 }

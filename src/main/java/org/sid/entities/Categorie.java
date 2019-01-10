@@ -3,12 +3,15 @@ package org.sid.entities;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,14 +19,11 @@ import javax.persistence.Table;
 public class Categorie implements Serializable {
 
    
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCategorieIdee")
+
 	private Long idCategorieIdee;
-    private String categorieIdee;
-    @ManyToMany(mappedBy = "Scenario")
-    private Set<Scenario> scenarios  = new HashSet<Scenario>(0);
-    @ManyToMany(mappedBy = "Idee")
-    private Set<Idee> idees  = new HashSet<Idee>(0);
+    private String categorieIdee;  
+    private Set<ScenarioCategorie> scenarioCategorie  = new HashSet<ScenarioCategorie>(0);
+    private Set<IdeeCategorie> ideeCategories  = new HashSet<IdeeCategorie>(0);
 
     public Categorie() {
 		super();
@@ -34,7 +34,8 @@ public class Categorie implements Serializable {
 		this.categorieIdee = categorieIdee;
 	}
 
-    
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idCategorieIdee")
 	public Long getIdCategorieIdee() {
 		return idCategorieIdee;
 	}
@@ -47,18 +48,25 @@ public class Categorie implements Serializable {
 	public void setCategorieIdee(String categorieIdee) {
 		this.categorieIdee = categorieIdee;
 	}
-	public Set<Scenario> getScenarios() {
-		return scenarios;
+	
+	  @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
+		public Set<ScenarioCategorie> getScenarioCategorie() {
+			return scenarioCategorie;
+		}
+		public void setScenarioCategorie(Set<ScenarioCategorie> scenarioCategorie) {
+			this.scenarioCategorie = scenarioCategorie;
+		}
+	
+	  @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
+	public Set<IdeeCategorie> getIdeeCategories() {
+		return ideeCategories;
 	}
-	public void setScenarios(Set<Scenario> scenarios) {
-		this.scenarios = scenarios;
+
+	public void setIdeeCategories(Set<IdeeCategorie> ideeCategories) {
+		this.ideeCategories = ideeCategories;
 	}
-	public Set<Idee> getIdees() {
-		return idees;
-	}
-	public void setIdees(Set<Idee> idees) {
-		this.idees = idees;
-	}
+
+	
 
 
 

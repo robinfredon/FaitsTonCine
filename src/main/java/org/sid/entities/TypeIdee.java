@@ -4,6 +4,7 @@ package org.sid.entities;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,15 +18,24 @@ import javax.persistence.Table;
 @Table(name = "TypeIdee")
 public class TypeIdee  implements Serializable{
  
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTypeIdee")
 	private Long idTypeIdee;
     private String typeIdee;
+    @OneToMany( mappedBy = "typeIdee")
     private Set<Idee> idees  = new HashSet<Idee>(0);
     public TypeIdee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+    
+	public TypeIdee(Long idTypeIdee, String typeIdee) {
+		super();
+		this.idTypeIdee = idTypeIdee;
+		this.typeIdee = typeIdee;
+	}
+
 	public TypeIdee(String typeIdee) {
 		super();
 		this.typeIdee = typeIdee;
@@ -43,7 +53,8 @@ public class TypeIdee  implements Serializable{
 	public void setTypeIdee(String typeIdee) {
 		this.typeIdee = typeIdee;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TypeIdee")
+
+
 	public Set<Idee> getIdees() {
 		return idees;
 	}

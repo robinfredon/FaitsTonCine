@@ -16,8 +16,7 @@ import javax.persistence.Table;
 
 public class Role implements Serializable {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idRole")
+
 	private Long idRole;
     private String role;
     
@@ -29,7 +28,8 @@ public class Role implements Serializable {
 		super();
 		this.role = role;
 	}
-
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idRole")
 	public Long getIdRole() {
 		return idRole;
 	}

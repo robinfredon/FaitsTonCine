@@ -26,37 +26,17 @@ import javax.persistence.TemporalType;
 public class Scenario implements Serializable{
    
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idScenario")
+
 	private Long idScenario;
     private String titre;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
     private String synopsys;
-    private Set<Projet> projets  = new HashSet<Projet>(0);
     private Utilisateur utilisateur;
-    private Set<Projet> projet  = new HashSet<Projet>(0);
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Scenario", 
-        joinColumns = { @JoinColumn(name = "idScenario") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idGenre") }
-    )
-    private Set<Genre> genres  = new HashSet<Genre>(0);
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Scenario", 
-        joinColumns = { @JoinColumn(name = "idScenario") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idMotsCle") }
-    )
-    private Set<Categorie> categories  = new HashSet<Categorie>(0);
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Scenario", 
-        joinColumns = { @JoinColumn(name = "idScenario") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idCategorieIdee") }
-    )
-    private Set<MotsCle> motcles  = new HashSet<MotsCle>(0);
+    private Set<Projet> projets  = new HashSet<Projet>(0);
+    private Set<ScenarioGenre> scenarioGenre  = new HashSet<ScenarioGenre>(0);
+    private Set<ScenarioCategorie> scenarioCategorie  = new HashSet<ScenarioCategorie>(0);
+    private Set<ScenarioMotsCle> scenarioMotsCle  = new HashSet<ScenarioMotsCle>(0);
     
     
     public Scenario() {
@@ -69,7 +49,8 @@ public class Scenario implements Serializable{
 		this.dateCreation = dateCreation;
 		this.synopsys = synopsys;
 	}
-
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idScenario")
 	public Long getIdScenario() {
 		return idScenario;
 	}
@@ -94,46 +75,51 @@ public class Scenario implements Serializable{
 	public void setSynopsys(String synopsys) {
 		this.synopsys = synopsys;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Scenario")
-
+	
+	@OneToMany(mappedBy = "scenario",cascade = CascadeType.ALL)
 	public Set<Projet> getProjets() {
 		return projets;
 	}
 	public void setProjets(Set<Projet> projets) {
 		this.projets = projets;
 	}
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idUtilisateur")
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idUtilisateur", nullable = false)
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	public Set<Projet> getProjet() {
-		return projet;
+
+	@OneToMany(mappedBy = "scenario",cascade = CascadeType.ALL)
+	public Set<ScenarioGenre> getScenarioGenre() {
+		return scenarioGenre;
 	}
-	public void setProjet(Set<Projet> projet) {
-		this.projet = projet;
+	public void setScenarioGenre(Set<ScenarioGenre> scenarioGenres) {
+		this.scenarioGenre = scenarioGenres;
 	}
-	public Set<Genre> getGenres() {
-		return genres;
+	
+
+	@OneToMany(mappedBy = "scenario",cascade = CascadeType.ALL)
+	public Set<ScenarioCategorie> getScenarioCategorie() {
+		return scenarioCategorie;
 	}
-	public void setGenres(Set<Genre> genres) {
-		this.genres = genres;
+	public void setScenarioCategorie(Set<ScenarioCategorie> scenarioCategorie) {
+		this.scenarioCategorie = scenarioCategorie;
 	}
-	public Set<Categorie> getCategories() {
-		return categories;
+	
+	@OneToMany(mappedBy = "scenario",cascade = CascadeType.ALL)
+	public Set<ScenarioMotsCle> getScenarioMotsCle() {
+		return scenarioMotsCle;
 	}
-	public void setCategories(Set<Categorie> categories) {
-		this.categories = categories;
+	public void setScenarioMotsCle(Set<ScenarioMotsCle> scenarioMotsCle) {
+		this.scenarioMotsCle = scenarioMotsCle;
 	}
-	public Set<MotsCle> getMotcles() {
-		return motcles;
-	}
-	public void setMotcles(Set<MotsCle> motcles) {
-		this.motcles = motcles;
-	}
+
+	
+
 
 
 }

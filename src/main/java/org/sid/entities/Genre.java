@@ -2,6 +2,7 @@ package org.sid.entities;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,12 +19,15 @@ public class Genre implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idGenre")
+	
 	private Long idGenre;
+	@Column(name = "genre", length = 200)
     private String genre;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Genre")
+    @OneToMany(cascade=CascadeType.ALL)
     private Set<Idee> idees  = new HashSet<Idee>(0);
-    @ManyToMany(mappedBy = "Scenario")
-    private Set<Scenario> scenarios  = new HashSet<Scenario>(0);
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "genre")
+    private Set<ScenarioGenre> scenarioGenre  = new HashSet<ScenarioGenre>(0);
   
     public Genre() {
 		super();
@@ -33,6 +37,7 @@ public class Genre implements Serializable {
 		super();
 		this.genre = genre;
 	}
+	
 
 	public Long getIdGenre() {
 		return idGenre;
@@ -40,25 +45,28 @@ public class Genre implements Serializable {
 	public void setIdGenre(Long idGenre) {
 		this.idGenre = idGenre;
 	}
+
 	public String getGenre() {
 		return genre;
 	}
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
+ 
 	public Set<Idee> getIdees() {
 		return idees;
 	}
 	public void setIdees(Set<Idee> idees) {
 		this.idees = idees;
 	}
-	public Set<Scenario> getScenarios() {
-		return scenarios;
+   
+	public Set<ScenarioGenre> getScenarioGenre() {
+		return scenarioGenre;
 	}
-	public void setScenarios(Set<Scenario> scenarios) {
-		this.scenarios = scenarios;
+	public void setScenarioGenre(Set<ScenarioGenre> scenarioGenres) {
+		this.scenarioGenre = scenarioGenres;
 	}
+   
 
 
 }

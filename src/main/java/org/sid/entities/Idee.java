@@ -11,11 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Type;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -27,33 +35,29 @@ public class Idee implements Serializable {
 	private Long idIdee;
 	@Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
+	
+	@Column(columnDefinition="nvarchar(20)")
+	//@Type(type="text")
     private String idee;
     private String titre;
+    
+	
+	@ManyToOne
+	@JoinColumn(name = "idGenre")
     private Genre genre;
-    private TypeIdee typeTdee;
-    private Utilisateur utilisateur;
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Idee", 
-        joinColumns = { @JoinColumn(name = "idIdee") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idProjet") }
-    )
-    private Set<Projet> projets  = new HashSet<Projet>(0);
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Idee", 
-        joinColumns = { @JoinColumn(name = "idIdee") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idMotsCle") }
-    )
-    private Set<MotsCle> motcles  = new HashSet<MotsCle>(0);
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Idee", 
-        joinColumns = { @JoinColumn(name = "idIdee") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idCategorieIdee") }
-    )
-    private Set<Categorie> categories  = new HashSet<Categorie>(0);
+    
+    @ManyToOne
+	@JoinColumn(name = "idTypeIdee")
+    private TypeIdee typeIdee;
+   // private Utilisateur utilisateur;
+    @JsonIgnore  @OneToMany(mappedBy = "idIdee") 
+    private Set<IdeeMotsCle> ideeMotcles  = new HashSet<IdeeMotsCle>(0);
+   /* @JsonIgnore @JsonManagedReference @OneToMany(mappedBy = "idee")
+    private Set<IdeeCategorie> ideeCategories  = new HashSet<IdeeCategorie>(0);
+    @JsonIgnore @JsonManagedReference@OneToMany(mappedBy = "idee")
+    private Set<ProjetIdee> projetIdees  = new HashSet<ProjetIdee>(0);
 
+*/
     public Idee() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -64,25 +68,19 @@ public class Idee implements Serializable {
 		this.idee = idee;
 		this.titre = titre;
 	}
+	
 
 
-	public Set<Projet> getProjets() {
-		return projets;
-	}
-	public void setProjets(Set<Projet> projets) {
-		this.projets = projets;
-	}
-	public Set<MotsCle> getMotcles() {
-		return motcles;
-	}
-	public void setMotcles(Set<MotsCle> motcles) {
-		this.motcles = motcles;
-	}
-	public Set<Categorie> getCategories() {
-		return categories;
-	}
-	public void setCategories(Set<Categorie> categories) {
-		this.categories = categories;
+	public Idee(Long idIdee, Date dateCreation, String idee, String titre, Genre genre, TypeIdee typeIdee,
+			Set<IdeeMotsCle> ideeMotcles) {
+		super();
+		this.idIdee = idIdee;
+		this.dateCreation = dateCreation;
+		this.idee = idee;
+		this.titre = titre;
+		this.genre = genre;
+		this.typeIdee = typeIdee;
+		this.ideeMotcles = ideeMotcles;
 	}
 	public Long getIdIdee() {
 		return idIdee;
@@ -96,6 +94,7 @@ public class Idee implements Serializable {
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
 	}
+	
 	public String getIdee() {
 		return idee;
 	}
@@ -108,8 +107,7 @@ public class Idee implements Serializable {
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idGenre")
+
 	public Genre getGenre() {
 		return genre;
 	}
@@ -117,22 +115,54 @@ public class Idee implements Serializable {
 		this.genre = genre;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idTypeIdee")
-	public TypeIdee getTypeTdee() {
-		return typeTdee;
+	
+	
+	public TypeIdee getTypeIdee() {
+		return typeIdee;
 	}
-	public void setTypeTdee(TypeIdee typeTdee) {
-		this.typeTdee = typeTdee;
+	public void setTypeIdee(TypeIdee typeIdee) {
+		this.typeIdee = typeIdee;
 	}
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idUtilisateur")
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "idUtilisateur", nullable = false)
+	
+//	public Utilisateur getUtilisateur() {
+//		return utilisateur;
+//	}
+//
+//	public void setUtilisateur(Utilisateur utilisateur) {
+//		this.utilisateur = utilisateur;
+//	}
+	
+
+ 
+	public Set<IdeeMotsCle> getIdeeMotcles() {
+		return ideeMotcles;
 	}
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setIdeeMotcles(Set<IdeeMotsCle> ideeMotcles) {
+		this.ideeMotcles = ideeMotcles;
+	}
+	
+	
+	
+	
+/*
+    
+	public Set<IdeeCategorie> getIdeeCategories() {
+		return ideeCategories;
 	}
 
+	public void setIdeeCategories(Set<IdeeCategorie> ideeCategories) {
+		this.ideeCategories = ideeCategories;
+	}
+	
+	
 
+	public Set<ProjetIdee> getProjetIdees() {
+		return projetIdees;
+	}
+	public void setProjetIdees(Set<ProjetIdee> projetIdees) {
+		this.projetIdees = projetIdees;
+	}
+*/
 }

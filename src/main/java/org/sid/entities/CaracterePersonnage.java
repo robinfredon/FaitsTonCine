@@ -4,27 +4,26 @@ package org.sid.entities;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-
 
 @Entity
 @Table(name = "CaracterePersonnage")
 public class CaracterePersonnage  implements Serializable{
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCaracterePer")
+	
 	private Long idCaracterePer;
     private String caractere;
+    private Set<PersonnageCaractere> personnageCaractere  = new HashSet<PersonnageCaractere>(0);
     
-    @ManyToMany(mappedBy = "Personnage")
-    private Set<Personnage> personnages  = new HashSet<Personnage>(0);
+    
     public CaracterePersonnage() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -35,7 +34,8 @@ public class CaracterePersonnage  implements Serializable{
 		this.caractere = caractere;
 	}
 
-
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idCaracterePer")
 	public Long getIdCaracterePer() {
 		return idCaracterePer;
 	}
@@ -51,13 +51,15 @@ public class CaracterePersonnage  implements Serializable{
 	public void setCaractere(String caractere) {
 		this.caractere = caractere;
 	}
-
-	public Set<Personnage> getPersonnages() {
-		return personnages;
+	
+    @OneToMany(mappedBy = "caracterPerssonnage",cascade = CascadeType.ALL)
+	public Set<PersonnageCaractere> getPersonnageCaractere() {
+		return personnageCaractere;
 	}
 
-	public void setPersonnages(Set<Personnage> personnages) {
-		this.personnages = personnages;
+	public void setPersonnageCaractere(Set<PersonnageCaractere> personnageCaractere) {
+		this.personnageCaractere = personnageCaractere;
 	}
+ 
 
 }
