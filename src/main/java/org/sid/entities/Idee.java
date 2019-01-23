@@ -37,22 +37,22 @@ public class Idee implements Serializable {
     private Date dateCreation;
 	
 	@Column(columnDefinition="nvarchar(20)")
-	//@Type(type="text")
     private String idee;
     private String titre;
-    
 	
-	@ManyToOne
-	@JoinColumn(name = "idGenre")
+    @ManyToOne@JoinColumn(name = "idGenre")
     private Genre genre;
     
-    @ManyToOne
-	@JoinColumn(name = "idTypeIdee")
+   
+    @ManyToOne@JoinColumn(name = "idTypeIdee")
     private TypeIdee typeIdee;
-   // private Utilisateur utilisateur;
-    @JsonIgnore  @OneToMany(mappedBy = "idIdee") 
-    private Set<IdeeMotsCle> ideeMotcles  = new HashSet<IdeeMotsCle>(0);
-   /* @JsonIgnore @JsonManagedReference @OneToMany(mappedBy = "idee")
+  
+    // private Utilisateur utilisateur;
+  
+    @OneToMany(mappedBy = "idee")
+    private Set<IdeeMotsCle> ideeMotcles ;
+   
+    /* @JsonIgnore @JsonManagedReference @OneToMany(mappedBy = "idee")
     private Set<IdeeCategorie> ideeCategories  = new HashSet<IdeeCategorie>(0);
     @JsonIgnore @JsonManagedReference@OneToMany(mappedBy = "idee")
     private Set<ProjetIdee> projetIdees  = new HashSet<ProjetIdee>(0);

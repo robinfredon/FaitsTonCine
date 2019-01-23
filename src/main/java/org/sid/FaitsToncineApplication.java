@@ -62,12 +62,12 @@ public class FaitsToncineApplication implements CommandLineRunner {
 //		
 //		
 		// TODO Auto-generated method stub
-//		motsClee.save(new MotsCle("voleur"));
-//		motsClee.save(new MotsCle("urgence"));
-//		motsClee.save(new MotsCle("police"));
-//		motsClee.save(new MotsCle("crime"));
-//		motsClee.save(new MotsCle("test22"));
-//		
+/*		motsClee.save(new MotsCle("voleur"));
+		motsClee.save(new MotsCle("urgence"));
+		motsClee.save(new MotsCle("police"));
+		motsClee.save(new MotsCle("crime"));
+		motsClee.save(new MotsCle("test22"));
+*/		
 //		typeIdee.save(new TypeIdee("Perssonage"));
 //	
 		//genre.save(new Genre("Comedie"));

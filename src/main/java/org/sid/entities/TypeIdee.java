@@ -18,13 +18,15 @@ import javax.persistence.Table;
 @Table(name = "TypeIdee")
 public class TypeIdee  implements Serializable{
  
-	@Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTypeIdee")
 	private Long idTypeIdee;
-    private String typeIdee;
-    @OneToMany( mappedBy = "typeIdee")
-    private Set<Idee> idees  = new HashSet<Idee>(0);
+    
+	private String typeIdee;
+    
+	/*@OneToMany( mappedBy = "typeIdee")
+    private Set<Idee> idees  ;
+    */
     public TypeIdee() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -54,13 +56,13 @@ public class TypeIdee  implements Serializable{
 		this.typeIdee = typeIdee;
 	}
 
-
+/*
 	public Set<Idee> getIdees() {
 		return idees;
 	}
 	public void setIdees(Set<Idee> idees) {
 		this.idees = idees;
 	}
-
+*/
 
 }

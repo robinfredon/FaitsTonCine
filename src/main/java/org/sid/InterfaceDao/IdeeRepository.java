@@ -11,14 +11,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
-//@RepositoryRestResource
+@RepositoryRestResource
 public interface IdeeRepository extends JpaRepository<Idee, Long> {
 	
 	@Query("select i.idee from Idee i")
 	public Set<String> getIdeeByidee();
 	
-	@Query("select i.idee from Idee i where i.genre.idGenre = :g")
-	public Set<String> getIdeeByGenre(@Param("g") Long g);
+	@Query("select i.idee from Idee i where i.genre.idGenre = :g and i.typeIdee.idTypeIdee = :ti")
+	public Set<String> getIdeeByGenre(@Param("g") Long g, @Param("ti") Long ti);
 	
 	public Idee findByIdee(String i);
 

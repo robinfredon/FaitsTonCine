@@ -75,7 +75,8 @@ public class MotsCle implements Serializable{
 		ScenarioMotcles = scenarioMotcles;
 	}
 	
-    @OneToMany(mappedBy = "idMotsCle",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "motsCle")
+
 	public Set<IdeeMotsCle> getIdeeMotcles() {
 		return ideeMotcles;
 	}

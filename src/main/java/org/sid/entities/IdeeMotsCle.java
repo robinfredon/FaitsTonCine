@@ -2,11 +2,13 @@ package org.sid.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
-
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,39 +23,66 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "IdeeMotsCle")
 public class IdeeMotsCle implements Serializable{
-	//@EmbeddedId
-	private Long Id;
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idIdeeMotsCle", unique = true, nullable = false)
+	private Long idIdeeMotsCle;
+	private IdeeMotsCleId id ;
+	@ManyToOne@JoinColumn(name = "idee")
+	private Idee idee;
+	@ManyToOne@JoinColumn(name = "motsCle")
+	private MotsCle motsCle;
 	
-private Long idIdee;
-
-private Long idMotsCle;
-
-//@AttributeOverrides({
-//	@AttributeOverride(name = "idIdee", column = @Column(name = "idIdee", nullable = false)),
-//	@AttributeOverride(name = "idMotsCle", column = @Column(name = "idMotsCle", nullable = false)) })
-@Id
-@GeneratedValue(strategy=GenerationType.IDENTITY)
-@Column(name = "id")
-public Long getId() {
-	return Id;
-}
-public void setId(Long id) {
-	Id = id;
-}
+	
+	
+	public IdeeMotsCle() {
+	}
+	
+	
+	
+	
+public Long getIdIdeeMotsCle() {
+		return idIdeeMotsCle;
+	}
 
 
-public Long getIdIdee() {
-	return idIdee;
-}
-public void setIdIdee(Long idIdee) {
-	this.idIdee = idIdee;
-}
-public Long getIdMotsCle() {
-	return idMotsCle;
-}
-public void setIdMotsCle(Long idMotsCle) {
-	this.idMotsCle = idMotsCle;
-}
 
+
+	public void setIdIdeeMotsCle(Long idIdeeMotsCle) {
+		this.idIdeeMotsCle = idIdeeMotsCle;
+	}
+
+
+
+
+@EmbeddedId
+	
+	@AttributeOverrides({
+			@AttributeOverride(name = "idMotsCle", column = @Column(name = "idMotsCle")),
+			@AttributeOverride(name = "idIdee", column = @Column(name = "idIdee"))})
+	
+	public IdeeMotsCleId getId() {
+		return id;
+	}
+	public void setId(IdeeMotsCleId id) {
+		this.id = id;
+	}
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idIdee", nullable = false, insertable = false, updatable = false)
+	public Idee getIdee() {
+		return idee;
+	}
+	public void setIdee(Idee idee) {
+		this.idee = idee;
+	}
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idMotsCle", nullable = false, insertable = false, updatable = false)
+	public MotsCle getMotsCle() {
+		return motsCle;
+	}
+	public void setMotsCle(MotsCle motsCle) {
+		this.motsCle = motsCle;
+	}
 
 }

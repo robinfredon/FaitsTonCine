@@ -19,16 +19,15 @@ public class Genre implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idGenre")
-	
 	private Long idGenre;
 	@Column(name = "genre", length = 200)
     private String genre;
-    @OneToMany(cascade=CascadeType.ALL)
-    private Set<Idee> idees  = new HashSet<Idee>(0);
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "genre")
+   /* @OneToMany(fetch = FetchType.LAZY)
+    private Set<Idee> idees ;
+    */
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "genre")
     private Set<ScenarioGenre> scenarioGenre  = new HashSet<ScenarioGenre>(0);
-  
+  */
     public Genre() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -52,20 +51,15 @@ public class Genre implements Serializable {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
- 
+ /*
 	public Set<Idee> getIdees() {
 		return idees;
 	}
 	public void setIdees(Set<Idee> idees) {
 		this.idees = idees;
 	}
-   
-	public Set<ScenarioGenre> getScenarioGenre() {
-		return scenarioGenre;
-	}
-	public void setScenarioGenre(Set<ScenarioGenre> scenarioGenres) {
-		this.scenarioGenre = scenarioGenres;
-	}
+   */
+
    
 
 
