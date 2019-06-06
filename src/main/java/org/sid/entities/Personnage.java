@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +30,8 @@ public class Personnage implements Serializable{
     private int age;
     private char sexe;
     private String biographie;
+    
+    @OneToOne@JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;
 
 
@@ -101,7 +104,6 @@ public class Personnage implements Serializable{
 		this.projetPersonnage = projetPersonnage;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUtilisateur", nullable = false)
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
