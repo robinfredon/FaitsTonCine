@@ -36,6 +36,7 @@ public class Idee implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
 	
+	private String auteur;
     private String idee;
     private String titre;
 	
@@ -71,10 +72,11 @@ public class Idee implements Serializable {
 
 
 	public Idee(Long idIdee, Date dateCreation, String idee, String titre, Genre genre, TypeIdee typeIdee,
-			Set<IdeeMotsCle> ideeMotcles) {
+			Set<IdeeMotsCle> ideeMotcles, String auteur) {
 		super();
 		this.idIdee = idIdee;
 		this.dateCreation = dateCreation;
+		this.auteur = auteur;
 		this.idee = idee;
 		this.titre = titre;
 		this.genre = genre;
@@ -140,6 +142,12 @@ public class Idee implements Serializable {
 	}
 	public void setIdeeMotcles(Set<IdeeMotsCle> ideeMotcles) {
 		this.ideeMotcles = ideeMotcles;
+	}
+	public String getAuteur() {
+		return auteur;
+	}
+	public void setAuteur(String auteur) {
+		this.auteur = auteur;
 	}
 	
 	
