@@ -15,6 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,10 +37,12 @@ public class Idee implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
 	
-	private Long idUtilisateur;
     private String idee;
     private String titre;
 	
+    @OneToOne@JoinColumn(name = "idUtilisateur")
+	private Utilisateur utilisateur;
+    
     @ManyToOne@JoinColumn(name = "idGenre")
     private Genre genre;
     
@@ -72,11 +75,11 @@ public class Idee implements Serializable {
 
 
 	public Idee(Long idIdee, Date dateCreation, String idee, String titre, Genre genre, TypeIdee typeIdee,
-			Set<IdeeMotsCle> ideeMotcles, Long auteur) {
+			Utilisateur utilisateur, Set<IdeeMotsCle> ideeMotcles) {
 		super();
 		this.idIdee = idIdee;
 		this.dateCreation = dateCreation;
-		this.idUtilisateur = auteur;
+		this.utilisateur = utilisateur;
 		this.idee = idee;
 		this.titre = titre;
 		this.genre = genre;
@@ -143,14 +146,6 @@ public class Idee implements Serializable {
 	public void setIdeeMotcles(Set<IdeeMotsCle> ideeMotcles) {
 		this.ideeMotcles = ideeMotcles;
 	}
-	
-	public Long getIdUtilisateur() {
-		return idUtilisateur;
-	}
-	public void setIdUtilisateur(Long idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
-	}
-	
 	
 	
 	
