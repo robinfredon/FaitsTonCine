@@ -36,7 +36,6 @@ public class Idee implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
 	
-	@Column(columnDefinition="nvarchar(20)")
     private String idee;
     private String titre;
 	
