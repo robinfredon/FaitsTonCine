@@ -127,16 +127,16 @@ public class Idee implements Serializable {
 	public void setTypeIdee(TypeIdee typeIdee) {
 		this.typeIdee = typeIdee;
 	}
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "idUtilisateur", nullable = false)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idUtilisateur", nullable = false)
 	
-//	public Utilisateur getUtilisateur() {
-//		return utilisateur;
-//	}
-//
-//	public void setUtilisateur(Utilisateur utilisateur) {
-//		this.utilisateur = utilisateur;
-//	}
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	
 
  
