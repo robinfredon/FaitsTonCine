@@ -1,0 +1,1 @@
+INSERT INTO genre VALUE (1,"toto"); INSERT INTO idee VALUE (1,1559816937,'robin','quatro','caleçon',1,1);
