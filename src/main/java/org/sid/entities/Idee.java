@@ -40,7 +40,7 @@ public class Idee implements Serializable {
     private String idee;
     private String titre;
 	
-    @OneToOne@JoinColumn(name = "idUtilisateur")
+    @ManyToOne@JoinColumn(name = "idUtilisateur")
 	private Utilisateur utilisateur;
     
     @ManyToOne@JoinColumn(name = "idGenre")
