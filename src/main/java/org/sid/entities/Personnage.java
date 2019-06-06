@@ -104,7 +104,7 @@ public class Personnage implements Serializable{
 		this.projetPersonnage = projetPersonnage;
 	}
 
-	@JoinColumn(name = "idUtilisateur", nullable = false)
+	//@JoinColumn(name = "idUtilisateur", nullable = false)
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
