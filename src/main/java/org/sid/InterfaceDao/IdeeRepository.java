@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource
 public interface IdeeRepository extends JpaRepository<Idee, Long> {
 	
-	@Query("select i.idee from Idee i order by dateCreation DESC")
+	@Query("select i.idee from Idee i")
 	public Set<String> getIdeeByidee();
 	
 	@Query("select i.idee from Idee i where i.genre.idGenre = :g and i.typeIdee.idTypeIdee = :ti")
