@@ -9,16 +9,20 @@ import javax.validation.Valid;
 import org.sid.InterfaceDao.PersonnageRepository;
 import org.sid.entities.Idee;
 import org.sid.entities.Personnage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import rita.RiMarkov;
 
+@CrossOrigin("*")
+@RestController
 public class PersonnageService {
 
+	@Autowired
 	private PersonnageRepository personnageRepository;
 	
 	@RequestMapping(value="/personnages", method= RequestMethod.POST)
