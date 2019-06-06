@@ -21,23 +21,23 @@ public class PersonnageService {
 
 	private PersonnageRepository personnageRepository;
 	
-	@RequestMapping(value="/personnage", method= RequestMethod.POST)
+	@RequestMapping(value="/personnages", method= RequestMethod.POST)
 	public Personnage SavePersonnage(@Valid @RequestBody Personnage i ){
 		return personnageRepository.save(i);
 	}
 	
-	@RequestMapping(value="/personnage", method=RequestMethod.GET)
+	@RequestMapping(value="/personnages", method=RequestMethod.GET)
 	public List<Personnage> getPersonnages(){
 		return personnageRepository.findAll();
 	}
 	
 	@RequestMapping(value="/personnage/{id}", method=RequestMethod.GET)
-	public Personnage getPersonnage(@PathVariable Long id){
+	public Personnage getPersonnages(@PathVariable Long id){
 		return personnageRepository.findById(id).orElse(null);
 	}
 	
 	@RequestMapping(value="/personnage/{id}", method=RequestMethod.PUT)
-	public Personnage updateIdee(@RequestBody Personnage i){
+	public Personnage updatePersoIdee(@RequestBody Personnage i){
 		return personnageRepository.save(i);
 	}
 	
