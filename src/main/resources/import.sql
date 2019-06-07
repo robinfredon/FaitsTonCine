@@ -12,6 +12,6 @@ INSERT INTO utilisateur (id_utilisateur, prenom, nom, date_creation, sexe, pseud
 
 INSERT INTO idee VALUES (1,'07/06/2019','le boxeur qui boxe tout','Rocky',1,null,1);
 
-INSERT INTO idee VALUES (2,'07/06/2019','Au lieu d'utiliser un trou de verre il se teleporte','interstelar',1,null,1);
+INSERT INTO idee VALUES (2,'07/06/2019','Au lieu d\'utiliser un trou de verre il se teleporte','interstelar',1,null,1);
 
-INSERT INTO personnage (id_personnage, age, biographie, nom, prenom, sexe, surnom, id_utilisateur) VALUES (1,30,'Le tireur qui tire plus vite que son ombre','lucky','luck','F','luckyne',1);
+INSERT INTO personnage (id_personnage, age, biographie, nom, prenom, sexe, surnom, utilisateur) VALUES (1,30,'Le tireur qui tire plus vite que son ombre','lucky','luck','F','luckyne',1);
