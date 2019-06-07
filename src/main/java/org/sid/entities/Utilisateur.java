@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 @Table(name = "Utilisateur")
 public class Utilisateur implements Serializable{
   
-
+	@Column(name = "idUtilisateur")
 	private Long idUtilisateur;
     private String nom;
     private String prenom;
