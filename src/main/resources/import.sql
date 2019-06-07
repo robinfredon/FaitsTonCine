@@ -1,1 +1,1 @@
-INSERT INTO genre (idGenre,genre) VALUES (1,'caleçon');
+INSERT INTO genre VALUES (1,'caleçon');
