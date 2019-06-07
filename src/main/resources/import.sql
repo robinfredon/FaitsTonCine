@@ -14,4 +14,4 @@ INSERT INTO idee VALUES (1,'07/06/2019','quatro','calecon',1,null,1);
 
 INSERT INTO idee VALUES (2,'07/06/2019','premier','test des idee',1,null,1);
 
-INSERT INTO personnage VALUES (1,'lucky','luck','luckyné',30,'F','Le tireur qui tire plus vite que son ombre',1);
+INSERT INTO personnage VALUES (1,30,','Le tireur qui tire plus vite que son ombre','lucky','luck','F','luckyne',1);
