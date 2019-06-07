@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface UtilisateurRepository  extends JpaRepository<Utilisateur, Long>{
-	
-	@Query("select all from Utilisateur where pseudo = login AND motDePasse = password")
-	public Utilisateur Connection(String login, String password);
 }
 
 
