@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserService {
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
-	private String password; // ajout pour le login
-	private String login;	// ajout pour le login 
 	
 	@RequestMapping(value="/users", method= RequestMethod.POST)
 	public @Valid Utilisateur SaveUtilisateur(@Valid @RequestBody Utilisateur i ){
@@ -41,13 +39,6 @@ public class UserService {
 	@RequestMapping(value="/user/{id}", method=RequestMethod.PUT)
 	public Utilisateur updateUtilisateur(@RequestBody Utilisateur i){
 		return utilisateurRepository.save(i);
-	}
-	
-	// LOGIN ***************************************************************
-		
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public Utilisateur getLogin(){
-		return utilisateurRepository.Connection(login, password);
 	}
 	
 	
