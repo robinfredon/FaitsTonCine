@@ -128,7 +128,7 @@ public class Idee implements Serializable {
 		this.typeIdee = typeIdee;
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	//@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUtilisateur", nullable = false)
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
