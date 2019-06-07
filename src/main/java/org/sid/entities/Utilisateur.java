@@ -31,8 +31,8 @@ public class Utilisateur implements Serializable{
     private String email;
     private int age;
    // private Set<Idee> idees  = new HashSet<Idee>(0);
-    private Set<Personnage> personnages  = new HashSet<Personnage>(0);
-    private Set<Scenario> scenarios  = new HashSet<Scenario>(0);
+    //private Set<Personnage> personnages  = new HashSet<Personnage>(0);
+    //private Set<Scenario> scenarios  = new HashSet<Scenario>(0);
     public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -119,7 +119,7 @@ public class Utilisateur implements Serializable{
 //	public void setIdees(Set<Idee> idees) {
 //		this.idees = idees;
 //	}
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    /*@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
 	public Set<Personnage> getPersonnages() {
 		return personnages;
 	}
@@ -132,7 +132,7 @@ public class Utilisateur implements Serializable{
 	}
 	public void setScenarios(Set<Scenario> scenarios) {
 		this.scenarios = scenarios;
-	}
+	}*/
 
 
 }
